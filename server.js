@@ -12,11 +12,14 @@ app.get('/', (req, res) => {
 })
 
 app.get('/:room', (req, res) => {
+  console.log(res)
   res.render('room', { roomId: req.params.room })
 })
 
 io.on('connection', socket => {
   socket.on('join-room', (roomId, userId) => {
+    console.log(roomId)
+
     socket.join(roomId)
     socket.to(roomId).broadcast.emit('user-connected', userId)
 
